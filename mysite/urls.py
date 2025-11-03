@@ -17,6 +17,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 
+handler404 = 'app.views.mi_error_404'
+handler400 = 'app.views.mi_error_400'
+handler403 = 'app.views.mi_error_403'
+handler500 = 'app.views.mi_error_500'
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('__debug__/',include("debug_toolbar.urls")),
