@@ -22,5 +22,6 @@ class Videojuego(models.Model):
 class Analisis(models.Model):
     puntuacion = models.IntegerField()
     videojuego = models.ForeignKey(Videojuego, on_delete=models.CASCADE)
+    fecha = models.DateField(null=True)
 
 

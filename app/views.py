@@ -43,3 +43,9 @@ def ventas_estimadas(request):
     videojuego = videojuego.filter(videojuego_plataforma=None).order_by('ventas_estimadas')
     videojuego = videojuego.all()
     return render(request, 'app/ventas_estimadas.html', {'ventas_estimadas':videojuego})
+
+def analisis_anyo(request, anyo):
+    videojuego = Videojuego.objects.select_related('estudio')
+    videojuego = videojuego.filter(analisis__fecha__year=anyo).order_by('-analisis__puntuacion')
+    videojuego = videojuego.all()
+    return render(request, 'app/analisis_anyo.html', {'analisis_anyo': videojuego})

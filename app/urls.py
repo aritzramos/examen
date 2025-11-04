@@ -7,5 +7,5 @@ urlpatterns = [
     path('videojuego/<str:titulo>/sede/<str:pais>', views.titulo_pais, name="titulo_pais"),
     path('plataforma/<str:fabricante>/plataforma/<str:nombre>/analisis/<int:puntuacion>', views.plataforma_analisis, name="plataforma_analisis"),
     path('videojuego', views.ventas_estimadas, name="ventas_estimadas"),
-    
+    path('analisis/<str:anyo>', views.analisis_anyo, name="analisis_anyo"),
 ]
