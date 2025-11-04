@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.views.defaults import page_not_found
+from .models import *
+from django.db.models import Q
 
 # Create your views here.
 
@@ -23,3 +25,8 @@ def index(request):
 
 # Querys
 
+def titulo_pais(request, titulo, pais):
+    videojuego = Videojuego.objects.select_related('estudio').prefetch_related('plataforma')
+    videojuego = videojuego.filter(titulo__contains=titulo, estudio__sede__pais__contains=pais)
+    videojuego = videojuego.all()
+    return render(request, 'app/titulo_pais.html', {'titulo_pais':videojuego})
