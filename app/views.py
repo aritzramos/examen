@@ -30,3 +30,10 @@ def titulo_pais(request, titulo, pais):
     videojuego = videojuego.filter(titulo__contains=titulo, estudio__sede__pais__contains=pais)
     videojuego = videojuego.all()
     return render(request, 'app/titulo_pais.html', {'titulo_pais':videojuego})
+
+def plataforma_analisis(request, fabricante, nombre, puntuacion):
+    videojuego = Videojuego.objects.select_related('estudio').prefetch_related('plataforma')
+    videojuego = videojuego.filter(Q(plataforma__fabricante=fabricante) | Q(plataforma__nombre__contains=nombre))
+    videojuego = videojuego.filter(analisis__puntuacion__gt = puntuacion)[:3]
+    videojuego = videojuego.all()
+    return render(request, 'app/plataforma_analisis.html', {'plataforma_analisis':videojuego})
