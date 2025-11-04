@@ -17,7 +17,8 @@ class Videojuego(models.Model):
     titulo = models.CharField(max_length=50)
     plataforma = models.ManyToManyField(Plataforma)
     estudio = models.ForeignKey(Estudio, on_delete=models.CASCADE)
-
+    ventas_estimadas = models.IntegerField(null=True)
+    
 class Analisis(models.Model):
     puntuacion = models.IntegerField()
     videojuego = models.ForeignKey(Videojuego, on_delete=models.CASCADE)

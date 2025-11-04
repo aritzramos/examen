@@ -37,3 +37,9 @@ def plataforma_analisis(request, fabricante, nombre, puntuacion):
     videojuego = videojuego.filter(analisis__puntuacion__gt = puntuacion)[:3]
     videojuego = videojuego.all()
     return render(request, 'app/plataforma_analisis.html', {'plataforma_analisis':videojuego})
+
+def ventas_estimadas(request):
+    videojuego = Videojuego.objects.select_related('estudio').prefetch_related('plataforma')
+    videojuego = videojuego.filter(videojuego_plataforma=None).order_by('ventas_estimadas')
+    videojuego = videojuego.all()
+    return render(request, 'app/ventas_estimadas.html', {'ventas_estimadas':videojuego})
